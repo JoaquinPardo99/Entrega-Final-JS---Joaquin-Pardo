@@ -1,37 +1,74 @@
-let librosDisponibles = 10
-let librosEnCarrito = 0
-const precioPorLibro = 10
+let libros = [
+    { id: 1, titulo: "Casi Tan Salvaje", autor: "Isabel Gonzales", genero: "Novela Contemporanea", precio: 20, stock: 1 },
+    { id: 2, titulo: "El Guardian", autor: "Nicholas Sparks", genero: "Novela Romantica", precio: 15, stock: 1 },
+    { id: 3, titulo: "El Reino del Dragon de Oro", autor: "Isabel Allende", genero: "Novela de Aventuras", precio: 10, stock: 1 },
+    { id: 4, titulo: "Deliciosa Chiara", autor: "Nicky Pellegrino", genero: "Novela Romantica", precio: 15, stock: 1 },
+    { id: 5, titulo: "El Jinete en la Onda del Shock", autor: "John Brunner", genero: "Ciencia Ficcion", precio: 10, stock: 1 },
+    { id: 6, titulo: "El Retrato de Dorian Gray", autor: "Oscar Wilde", genero: "Novela Gotica", precio: 20, stock: 1 },
+    { id: 7, titulo: "Sol Tan Lejos", autor: "Jorge Eslava", genero: "Novela Corta", precio: 10, stock: 1 },
+]
 
-let cantidad
-
-do{
-    cantidad = parseInt(prompt("Ingrese la cantidad de libros que desea agregar al carrito:"))
-
-    if(isNaN(cantidad) || cantidad <= 0) {
-        alert("Por favor, ingrese una cantidad válida mayor a 0.")
-    }else if (cantidad > librosDisponibles) {
-        alert("Lo sentimos, no hay suficientes libros disponibles.")
-    }else if (cantidad > 10) {
-        alert("Por favor, ingrese una cantidad menor o igual a 10.")
-    }
-}while(isNaN(cantidad) || cantidad <= 0 || cantidad > 10)
-
-function agregarAlCarrito(cantidad){
-
-    librosEnCarrito += cantidad
-    librosDisponibles -= cantidad
-
-    alert(`Se han agregado ${cantidad} libros al carrito.`)
+function mostrarLibrosDisponibles() {
+    console.log("Libros disponibles:")
+    libros.forEach(libro => {
+        console.log(`ID: ${libro.id}, Título: ${libro.titulo}, Autor: ${libro.autor}, Precio: ${libro.precio}`)
+    })
 }
 
-agregarAlCarrito(cantidad)
+let librosEnCarrito = []
 
-function simularCompra(){
+function buscarPorTitulo(titulo) {
+    return libros.filter(libro => libro.titulo.toLowerCase().includes(titulo.toLowerCase()))
+}
 
-    const precioTotal = librosEnCarrito * precioPorLibro
+function filtrarPorAutor(autor) {
+    return libros.filter(libro => libro.autor.toLowerCase() === autor.toLowerCase())
+}
+
+function agregarAlCarrito(idLibro) {
+    let libroExistente = librosEnCarrito.find(item => item.libro.id === idLibro)
+    let libro = libros.find(libro => libro.id === idLibro)
+
+    if (libro && libro.stock >= 1 && !libroExistente) {
+        librosEnCarrito.push({ libro })
+        libro.stock -= 1
+        return true
+    } else if (libroExistente) {
+        alert("Este libro ya está en el carrito")
+        return false
+    } else {
+        return false
+    }
+}
+
+let continuar
+do {
+    mostrarLibrosDisponibles()
+
+    let idLibro = parseInt(prompt("Ingrese el ID del libro que desea agregar al carrito:"))
+
+    if (agregarAlCarrito(idLibro)) {
+        alert(`Se ha agregado el libro al carrito.`)
+    } else {
+        alert("Lo sentimos, no se pudo agregar el libro al carrito.")
+    }
+
+    let respuesta
+    do {
+        respuesta = prompt("¿Desea agregar más libros al carrito? (si/no)").toLowerCase()
+    } while (respuesta !== "si" && respuesta !== "no")
+
+    continuar = respuesta === "si"
+
+} while (continuar)
+
+function simularCompra() {
+    let precioTotal = 0
+    librosEnCarrito.forEach(item => {
+        precioTotal += item.libro.precio
+    })
     alert(`El precio total de la compra es: $${precioTotal}`)
-    librosEnCarrito = 0
-    librosDisponibles = 10
+    librosEnCarrito = []
 }
 
 simularCompra()
