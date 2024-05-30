@@ -1,4 +1,4 @@
-let libros = [
+const libros = [
     { id: 1, titulo: "Casi Tan Salvaje", autor: "Isabel Gonzales", genero: "Novela Contemporanea", precio: 20, stock: 1 },
     { id: 2, titulo: "El Guardian", autor: "Nicholas Sparks", genero: "Novela Romantica", precio: 15, stock: 1 },
     { id: 3, titulo: "El Reino del Dragon de Oro", autor: "Isabel Allende", genero: "Novela de Aventuras", precio: 10, stock: 1 },
@@ -6,69 +6,115 @@ let libros = [
     { id: 5, titulo: "El Jinete en la Onda del Shock", autor: "John Brunner", genero: "Ciencia Ficcion", precio: 10, stock: 1 },
     { id: 6, titulo: "El Retrato de Dorian Gray", autor: "Oscar Wilde", genero: "Novela Gotica", precio: 20, stock: 1 },
     { id: 7, titulo: "Sol Tan Lejos", autor: "Jorge Eslava", genero: "Novela Corta", precio: 10, stock: 1 },
-]
+];
+
+let librosEnCarrito = [];
 
 function mostrarLibrosDisponibles() {
-    console.log("Libros disponibles:")
+    const listaLibros = document.getElementById('lista-libros');
+    listaLibros.innerHTML = '';
+
     libros.forEach(libro => {
-        console.log(`ID: ${libro.id}, Título: ${libro.titulo}, Autor: ${libro.autor}, Precio: ${libro.precio}`)
-    })
-}
-
-let librosEnCarrito = []
-
-function buscarPorTitulo(titulo) {
-    return libros.filter(libro => libro.titulo.toLowerCase().includes(titulo.toLowerCase()))
-}
-
-function filtrarPorAutor(autor) {
-    return libros.filter(libro => libro.autor.toLowerCase() === autor.toLowerCase())
+        const li = document.createElement('li');
+        li.textContent = `ID: ${libro.id}, Título: ${libro.titulo}, Autor: ${libro.autor}, Precio: ${libro.precio}`;
+        const button = document.createElement('button');
+        button.textContent = 'Agregar al carrito';
+        button.onclick = () => agregarAlCarrito(libro.id);
+        li.appendChild(button);
+        listaLibros.appendChild(li);
+    });
 }
 
 function agregarAlCarrito(idLibro) {
-    let libroExistente = librosEnCarrito.find(item => item.libro.id === idLibro)
-    let libro = libros.find(libro => libro.id === idLibro)
+    const libroExistente = librosEnCarrito.find(item => item.libro.id === idLibro);
+    const libro = libros.find(libro => libro.id === idLibro);
 
     if (libro && libro.stock >= 1 && !libroExistente) {
-        librosEnCarrito.push({ libro })
-        libro.stock -= 1
-        return true
+        librosEnCarrito.push({ libro });
+        libro.stock -= 1;
+        mostrarNotificacion(`Se ha agregado "${libro.titulo}" al carrito.`, 'success');
+        actualizarCarrito();
+        mostrarLibrosDisponibles();
+        guardarCarrito();
     } else if (libroExistente) {
-        alert("Este libro ya está en el carrito")
-        return false
+        mostrarNotificacion("¡Este libro ya está en el carrito!", 'error');
     } else {
-        return false
+        mostrarNotificacion("Lo sentimos, no se pudo agregar el libro al carrito.", 'error');
     }
 }
 
-let continuar
-do {
-    mostrarLibrosDisponibles()
+function actualizarCarrito() {
+    const listaCarrito = document.getElementById('lista-carrito');
+    listaCarrito.innerHTML = '';
 
-    let idLibro = parseInt(prompt("Ingrese el ID del libro que desea agregar al carrito:"))
+    librosEnCarrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `Título: ${item.libro.titulo}, Autor: ${item.libro.autor}, Precio: ${item.libro.precio}`;
+        const button = document.createElement('button');
+        button.textContent = 'Eliminar';
+        button.onclick = () => eliminarDelCarrito(index);
+        li.appendChild(button);
+        listaCarrito.appendChild(li);
+    });
 
-    if (agregarAlCarrito(idLibro)) {
-        alert(`Se ha agregado el libro al carrito.`)
-    } else {
-        alert("Lo sentimos, no se pudo agregar el libro al carrito.")
-    }
+    const precioTotal = librosEnCarrito.reduce((total, item) => total + item.libro.precio, 0);
+    document.getElementById('precio-total').textContent = `Precio Total: $${precioTotal}`;
+}
 
-    let respuesta
-    do {
-        respuesta = prompt("¿Desea agregar más libros al carrito? (si/no)").toLowerCase()
-    } while (respuesta !== "si" && respuesta !== "no")
+function eliminarDelCarrito(index) {
+    const libro = librosEnCarrito[index].libro;
+    librosEnCarrito.splice(index, 1);
+    libro.stock += 1;
+    mostrarNotificacion(`Se ha eliminado "${libro.titulo}" del carrito.`, 'error');
+    actualizarCarrito();
+    mostrarLibrosDisponibles();
+    guardarCarrito();
+}
 
-    continuar = respuesta === "si"
-
-} while (continuar)
+document.getElementById('simular-compra').addEventListener('click', simularCompra);
 
 function simularCompra() {
-    let precioTotal = 0
-    librosEnCarrito.forEach(item => {
-        precioTotal += item.libro.precio
-    })
-    alert(`El precio total de la compra es: $${precioTotal}`)
-    librosEnCarrito = []
+    const precioTotal = librosEnCarrito.reduce((total, item) => total + item.libro.precio, 0);
+    mostrarNotificacion(`El precio total de la compra es: $${precioTotal}`, 'success');
+    librosEnCarrito = [];
+    libros.forEach(libro => libro.stock = 1);
+    actualizarCarrito();
+    mostrarLibrosDisponibles();
+    localStorage.removeItem('carrito');
 }
 
-simularCompra()
+function guardarCarrito() {
+    localStorage.setItem('carrito', JSON.stringify(librosEnCarrito));
+}
+
+function cargarCarrito() {
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado) {
+        librosEnCarrito = JSON.parse(carritoGuardado);
+        actualizarCarrito();
+    }
+}
+
+function mostrarNotificacion(mensaje, tipo) {
+    const notificaciones = document.getElementById('notificaciones');
+    const div = document.createElement('div');
+    div.className = `notificacion ${tipo}`;
+    div.textContent = mensaje;
+    notificaciones.appendChild(div);
+    
+    setTimeout(() => {
+        div.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        div.classList.remove('show');
+        setTimeout(() => {
+            notificaciones.removeChild(div);
+        }, 300);
+    }, 3000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarLibrosDisponibles();
+    cargarCarrito();
+});
