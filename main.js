@@ -75,12 +75,17 @@ document.getElementById('simular-compra').addEventListener('click', simularCompr
 
 function simularCompra() {
     const precioTotal = librosEnCarrito.reduce((total, item) => total + item.libro.precio, 0);
-    mostrarNotificacion(`El precio total de la compra es: $${precioTotal}`, 'success');
     librosEnCarrito = [];
     libros.forEach(libro => libro.stock = 1);
     actualizarCarrito();
     mostrarLibrosDisponibles();
     localStorage.removeItem('carrito');
+    Swal.fire({
+        title: 'Gracias por tu compra!',
+        text: `El precio total de la compra es: $${precioTotal}`,
+        icon: 'success',
+        confirmButtonText: 'Cerrar'
+    });
 }
 
 function guardarCarrito() {
@@ -101,11 +106,11 @@ function mostrarNotificacion(mensaje, tipo) {
     div.className = `notificacion ${tipo}`;
     div.textContent = mensaje;
     notificaciones.appendChild(div);
-    
+
     setTimeout(() => {
         div.classList.add('show');
     }, 10);
-    
+
     setTimeout(() => {
         div.classList.remove('show');
         setTimeout(() => {

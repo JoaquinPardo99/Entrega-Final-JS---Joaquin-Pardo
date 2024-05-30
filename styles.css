@@ -33,7 +33,7 @@ li {
 
 button {
     padding: 5px 10px;
-    background-color: #661ebd;
+    background-color: #7300ff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -41,32 +41,35 @@ button {
 }
 
 button:hover {
-    background-color: #661ebd9c;
+    background-color: #7300ff97;
 }
 
 #notificaciones {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     width: 300px;
-    z-index: 1000;
 }
 
 .notificacion {
-    background-color: #4caf50;
-    color: white;
-    padding: 15px;
-    margin-bottom: 10px;
+    margin: 10px 0;
+    padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
     opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.notificacion.error {
-    background-color: #f44336;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
 }
 
 .notificacion.show {
     opacity: 1;
+    transform: translateY(0);
+}
+
+.notificacion.success {
+    background-color: #4caf50;
+}
+
+.notificacion.error {
+    background-color: #f44336;
 }
