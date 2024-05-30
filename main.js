@@ -47,15 +47,21 @@ function actualizarCarrito() {
     const listaCarrito = document.getElementById('lista-carrito');
     listaCarrito.innerHTML = '';
 
-    librosEnCarrito.forEach((item, index) => {
+    if (librosEnCarrito.length === 0) {
         const li = document.createElement('li');
-        li.textContent = `Título: ${item.libro.titulo}, Autor: ${item.libro.autor}, Precio: ${item.libro.precio}`;
-        const button = document.createElement('button');
-        button.textContent = 'Eliminar';
-        button.onclick = () => eliminarDelCarrito(index);
-        li.appendChild(button);
+        li.textContent = "El carrito está vacío.";
         listaCarrito.appendChild(li);
-    });
+    } else {
+        librosEnCarrito.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.textContent = `Título: ${item.libro.titulo}, Autor: ${item.libro.autor}, Precio: ${item.libro.precio}`;
+            const button = document.createElement('button');
+            button.textContent = 'Eliminar';
+            button.onclick = () => eliminarDelCarrito(index);
+            li.appendChild(button);
+            listaCarrito.appendChild(li);
+        });
+    }
 
     const precioTotal = librosEnCarrito.reduce((total, item) => total + item.libro.precio, 0);
     document.getElementById('precio-total').textContent = `Precio Total: $${precioTotal}`;
@@ -74,18 +80,29 @@ function eliminarDelCarrito(index) {
 document.getElementById('simular-compra').addEventListener('click', simularCompra);
 
 function simularCompra() {
-    const precioTotal = librosEnCarrito.reduce((total, item) => total + item.libro.precio, 0);
-    librosEnCarrito = [];
-    libros.forEach(libro => libro.stock = 1);
-    actualizarCarrito();
-    mostrarLibrosDisponibles();
-    localStorage.removeItem('carrito');
-    Swal.fire({
-        title: 'Gracias por tu compra!',
-        text: `El precio total de la compra es: $${precioTotal}`,
-        icon: 'success',
-        confirmButtonText: 'Cerrar'
-    });
+    if (librosEnCarrito.length === 0) {
+
+        Swal.fire({
+            title: 'Carrito Vacío',
+            text: '¡No hay libros en el carrito!',
+            icon: 'warning',
+            confirmButtonText: 'Cerrar'
+        });
+    } else {
+
+        const precioTotal = librosEnCarrito.reduce((total, item) => total + item.libro.precio, 0);
+        librosEnCarrito = [];
+        libros.forEach(libro => libro.stock = 1);
+        actualizarCarrito();
+        mostrarLibrosDisponibles();
+        localStorage.removeItem('carrito');
+        Swal.fire({
+            title: 'Gracias por tu compra!',
+            text: `El precio total de la compra es: $${precioTotal}`,
+            icon: 'success',
+            confirmButtonText: 'Cerrar'
+        });
+    }
 }
 
 function guardarCarrito() {
