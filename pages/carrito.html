@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de E-commerce de Libros</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="logo">
             <h1 id="home-link">
-                <img src="img/Lectora_de_a_luca_low.png" alt="Logo" class="logo-img">
+                <img src="../img/Lectora_de_a_luca_low.png" alt="Logo" class="logo-img">
             </h1>
         </div>
         <div class="header-buttons">
             <button id="dark-mode-toggle">Modo Oscuro 🌑</button>
             <div class="cart">
-                <a href="pages/carrito.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
+                <a href="carrito.html"><i class="fas fa-shopping-cart"></i><span id="cart-count">0</span></a>
             </div>
         </div>
     </header>
 
     <div id="main-content">
-        <div id="libros-disponibles">
-            <h2>Libros Disponibles</h2>
-            <ul id="lista-libros"></ul>
+        <div id="carrito">
+            <h2>Carrito de Compras</h2>
+            <ul id="lista-carrito"></ul>
+            <p id="precio-total"></p>
+            <button id="simular-compra">Simular Compra</button>
         </div>
     </div>
     
@@ -36,6 +38,6 @@
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/carrito.js"></script>
 </body>
 </html>
