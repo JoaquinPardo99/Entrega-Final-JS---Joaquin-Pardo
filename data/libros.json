@@ -1,14 +1,14 @@
 [
-    { "id": 1, "titulo": "Casi Tan Salvaje", "autor": "Isabel Gonzales", "genero": "Novela Contemporanea", "precio": 20, "stock": 1, "imagen": "../img/Casi_tan_salvaje.jpg" },
-    { "id": 2, "titulo": "El Guardian", "autor": "Nicholas Sparks", "genero": "Novela Romantica", "precio": 15, "stock": 1, "imagen": "../img/El_guardian.jpg" },
-    { "id": 3, "titulo": "El Reino del Dragon de Oro", "autor": "Isabel Allende", "genero": "Novela de Aventuras", "precio": 10, "stock": 1, "imagen": "../img/El_reino_del_dragon_de_oro.jpg" },
-    { "id": 4, "titulo": "Deliciosa Chiara", "autor": "Nicky Pellegrino", "genero": "Novela Romantica", "precio": 15, "stock": 1, "imagen": "../img/Deliciosa_chiara.jpg" },
-    { "id": 5, "titulo": "El Jinete en la Onda del Shock", "autor": "John Brunner", "genero": "Ciencia Ficcion", "precio": 10, "stock": 1, "imagen": "../img/El_jinete_en_la_onda_del_shock.jpg" },
-    { "id": 6, "titulo": "El Retrato de Dorian Gray", "autor": "Oscar Wilde", "genero": "Novela Gotica", "precio": 20, "stock": 1, "imagen": "../img/El_retrato_de_dorian_gray.png" },
-    { "id": 7, "titulo": "Sol Tan Lejos", "autor": "Jorge Eslava", "genero": "Novela Corta", "precio": 10, "stock": 1, "imagen": "../img/Sol_tan_lejos.jpeg" },
-    { "id": 8, "titulo": "Fifa Mafia", "autor": "Thomas Kistner", "genero": "Investigación Periodistica", "precio": 30, "stock": 1, "imagen": "../img/Fifa_mafia.jpeg" },
-    { "id": 9, "titulo": "El Derecho de la Gente", "autor": "John Rawls", "genero": "Filosofía Política", "precio": 10, "stock": 1, "imagen": "../img/El_derecho_de_la_gente.jpg" },
-    { "id": 10, "titulo": "El Diluvio", "autor": "J. M. G. Le Clezio", "genero": "Novela Histórica", "precio": 20, "stock": 1, "imagen": "../img/El_diluvio.jpeg" },
-    { "id": 11, "titulo": "El Escritor y sus Fantasmas", "autor": "Ernesto Sabato", "genero": "Ensayo Literario", "precio": 10, "stock": 1, "imagen": "../img/El_escritor_y_sus_fantasmas.jpeg" },
-    { "id": 12, "titulo": "El Susurro de la Mujer Ballena", "autor": "Alonso Cueto", "genero": "Novela Contemporanea", "precio": 30, "stock": 1, "imagen": "../img/El_susurro_de_la_mujer_ballena.jpeg" }
+    { "id": 1, "titulo": "Casi Tan Salvaje", "autor": "Isabel Gonzales", "genero": "Novela Contemporanea", "precio": 20, "stock": 1, "imagen": "./img/Casi_tan_salvaje.jpg" },
+    { "id": 2, "titulo": "El Guardian", "autor": "Nicholas Sparks", "genero": "Novela Romantica", "precio": 15, "stock": 1, "imagen": "./img/El_guardian.jpg" },
+    { "id": 3, "titulo": "El Reino del Dragon de Oro", "autor": "Isabel Allende", "genero": "Novela de Aventuras", "precio": 10, "stock": 1, "imagen": "./img/El_reino_del_dragon_de_oro.jpg" },
+    { "id": 4, "titulo": "Deliciosa Chiara", "autor": "Nicky Pellegrino", "genero": "Novela Romantica", "precio": 15, "stock": 1, "imagen": "./img/Deliciosa_chiara.jpg" },
+    { "id": 5, "titulo": "El Jinete en la Onda del Shock", "autor": "John Brunner", "genero": "Ciencia Ficcion", "precio": 10, "stock": 1, "imagen": "./img/El_jinete_en_la_onda_del_shock.jpg" },
+    { "id": 6, "titulo": "El Retrato de Dorian Gray", "autor": "Oscar Wilde", "genero": "Novela Gotica", "precio": 20, "stock": 1, "imagen": "./img/El_retrato_de_dorian_gray.png" },
+    { "id": 7, "titulo": "Sol Tan Lejos", "autor": "Jorge Eslava", "genero": "Novela Corta", "precio": 10, "stock": 1, "imagen": "./img/Sol_tan_lejos.jpeg" },
+    { "id": 8, "titulo": "Fifa Mafia", "autor": "Thomas Kistner", "genero": "Investigación Periodistica", "precio": 30, "stock": 1, "imagen": "./img/Fifa_mafia.jpeg" },
+    { "id": 9, "titulo": "El Derecho de la Gente", "autor": "John Rawls", "genero": "Filosofía Política", "precio": 10, "stock": 1, "imagen": "./img/El_derecho_de_la_gente.jpg" },
+    { "id": 10, "titulo": "El Diluvio", "autor": "J. M. G. Le Clezio", "genero": "Novela Histórica", "precio": 20, "stock": 1, "imagen": "./img/El_diluvio.jpeg" },
+    { "id": 11, "titulo": "El Escritor y sus Fantasmas", "autor": "Ernesto Sabato", "genero": "Ensayo Literario", "precio": 10, "stock": 1, "imagen": "./img/El_escritor_y_sus_fantasmas.jpeg" },
+    { "id": 12, "titulo": "El Susurro de la Mujer Ballena", "autor": "Alonso Cueto", "genero": "Novela Contemporanea", "precio": 30, "stock": 1, "imagen": "./img/El_susurro_de_la_mujer_ballena.jpeg" }
 ]

@@ -33,7 +33,8 @@ const agregarAlCarrito = (idLibro) => {
     const libro = libros.find(({ id }) => id === idLibro);
 
     if (libro?.stock >= 1 && !libroExistente) {
-        librosEnCarrito.push({ libro });
+        const libroConImagenModificada = { ...libro, imagen: `.${libro.imagen}` };
+        librosEnCarrito.push({ libro: libroConImagenModificada });
         libro.stock--;
         mostrarNotificacion(`Se ha agregado "${libro.titulo}" al carrito.`, 'success');
         guardarCarrito();
